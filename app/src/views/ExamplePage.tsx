@@ -43,7 +43,7 @@ export default function ExamplePage() {
             {/* Add table rows here as needed */}
             <TableRow>
               <TableCell className="font-bold align-top">AI - Page interaction binding</TableCell>
-              <TableCell className="align-top whitespace-normal">There is no expectation that interations within the AI container will be reflected on the parent page. The parent page is unaware of the AI container's existence.</TableCell>
+              <TableCell className="align-top whitespace-normal">There is no expectation that interations within the AI container will be reflected on the parent page. The parent page is unaware of the AI container&apos;s existence.</TableCell>
             </TableRow>
             <TableRow>
               <TableCell className="font-bold align-top">Design system</TableCell>
