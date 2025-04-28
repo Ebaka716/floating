@@ -5,6 +5,15 @@ import PageLayout from '@/components/PageLayout/PageLayout';
 import FloatingLayer from '@/components/FloatingLayer/FloatingLayer';
 import { Button } from '@/components/ui/button'; // Import Button
 import { Search, History, Settings } from 'lucide-react'; // Import Icons
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table" // Add Table imports
 
 export default function ExamplePage() {
   const [isFloatingLayerOpen, setIsFloatingLayerOpen] = useState(true); // Changed initial state to true
@@ -19,9 +28,31 @@ export default function ExamplePage() {
       isLayerOpen={isFloatingLayerOpen}
     >
       {/* Pass function to open layer */}
-      <h1>Example Page Content</h1>
-      <p>This is the main content area of the page.</p>
-      <p>Below should be the floating layer component.</p>
+      <h1>Parent Page Content</h1>
+      {/* Insert the table here */}
+      <div className="w-1/2 py-4"> {/* Container div with width and padding */}
+        <Table>
+          <TableCaption>A list of topics.</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="font-bold">Topic</TableHead>
+              <TableHead>Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {/* Add table rows here as needed */}
+            <TableRow>
+              <TableCell className="font-bold align-top">AI - Page interaction binding</TableCell>
+              <TableCell className="align-top whitespace-normal">There is no expectation that interations within the AI container will be reflected on the parent page. The parent page is unaware of the AI container's existence.</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-bold align-top">Design system</TableCell>
+              <TableCell className="align-top whitespace-normal">Owns design of the AI container wrapper, elevation, and the parent page.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </div>
+      {/* End of inserted table */}
 
       <FloatingLayer
         isOpen={isFloatingLayerOpen} // Pass state
