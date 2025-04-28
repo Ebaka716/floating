@@ -1,0 +1,59 @@
+# FloatingLayer Component
+
+A right-aligned, fixed-position overlay component with a header and toggleable options panel.
+
+## Description
+
+The `FloatingLayer` uses `shadcn/ui`'s `Card` component as its base. It positions itself fixed to the top-right of the viewport (`top-16`, `right-4`, `bottom-6`). It features:
+
+*   **Header:** Contains:
+    *   An orange Menu button (≡) on the left.
+    *   An optional title next to the Menu button.
+    *   A red Close button (×) on the right.
+*   **External Control:** The layer's visibility is controlled by the parent via the `isOpen` prop. The Close button calls the `onClose` prop passed by the parent.
+*   **Options Panel:** Clicking the Menu button triggers a slide-in animation where the `optionsContent` slides in from the left, replacing the main `children` content.
+*   **Content Area:** When the options panel is closed, the main `children` are displayed. This area scrolls if content exceeds the available height.
+
+## Props
+
+| Prop             | Type              | Required | Default            | Description                                                  |
+| :--------------- | :---------------- | :------- | :----------------- | :----------------------------------------------------------- |
+| `isOpen`         | `boolean`         | Yes      | -                  | Controls whether the floating layer is visible.                |
+| `onClose`        | `() => void`      | Yes      | -                  | Callback function executed when the Close (×) button is clicked. |
+| `title`          | `React.ReactNode` | No       | 'Floating Layer'   | The title displayed in the layer's header.                    |
+| `children`       | `React.ReactNode` | No       | -                  | Content for the main area (visible when options are closed).   |
+| `optionsContent` | `React.ReactNode` | No       | 'Layer Options'    | Content displayed within the slide-in options panel.           |
+
+## Wireframe / Visual (Options Closed)
+
+```text
++--------------------------------------+
+| [≡] Title                 [×]        |
++======================================+
+|                                      |
+|      Main Content Area (children)    |
+|           (Scrollable)               |
+|                                      |
++--------------------------------------+
+```
+*(Positioned fixed, `top-16`, `right-4`, `bottom-6`)*
+
+## Wireframe / Visual (Options Open)
+
+```text
++--------------------------------------+
+| [≡] Title                 [×]        |
++======================================+
+|                                      |
+|      Options Content Area            |
+|           (Scrollable)               |
+|                                      |
++--------------------------------------+
+```
+
+## Functionality Notes
+
+-   Requires `'use client'` directive as it uses internal state (`isOptionsOpen`) and event handlers.
+-   Uses `lucide-react` for icons (`X`, `Menu`).
+-   The slide animation uses CSS transitions (`transition-transform`) and conditional transform classes (`translate-x-0`, `-translate-x-full`, `translate-x-full`).
+-   The parent component is responsible for managing the `isOpen` state and providing the `onClose` callback. 

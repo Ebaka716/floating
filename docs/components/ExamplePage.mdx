@@ -1,0 +1,48 @@
+# ExamplePage View
+
+Demonstrates the integration of `PageLayout` and `FloatingLayer` components, including state management for the layer's visibility.
+
+## Purpose
+
+This view serves as a simple demonstration of how the core layout (`PageLayout`) and the overlay component (`FloatingLayer`) work together. It shows how a parent component (`ExamplePage`) manages the open/closed state of the `FloatingLayer` and passes the necessary state and callbacks down as props.
+
+## Implementation
+
+-   Imports `PageLayout` and `FloatingLayer`.
+-   Uses the `useState` hook to manage the `isFloatingLayerOpen` state (initialized to `false`).
+-   Renders the `PageLayout` as the root element, passing a function to `onOpenFloatingLayerClick` that sets `isFloatingLayerOpen` to `true`.
+-   Renders the `FloatingLayer` component, passing:
+    -   `isOpen={isFloatingLayerOpen}`
+    -   `onClose={() => setIsFloatingLayerOpen(false)}`
+    -   Custom `title` and `optionsContent` props.
+-   Includes placeholder content within `PageLayout`.
+-   Requires the `'use client'` directive because it uses state.
+
+## Usage
+
+This view is typically rendered by the root route (`src/app/page.tsx`) for initial testing and demonstration.
+
+```tsx
+// src/views/ExamplePage.tsx
+'use client';
+
+import { useState } from 'react';
+import PageLayout from '@/components/PageLayout/PageLayout';
+import FloatingLayer from '@/components/FloatingLayer/FloatingLayer';
+
+export default function ExamplePage() {
+  const [isFloatingLayerOpen, setIsFloatingLayerOpen] = useState(false);
+
+  return (
+    <PageLayout onOpenFloatingLayerClick={() => setIsFloatingLayerOpen(true)}>
+      {/* ... content ... */}
+      <FloatingLayer
+        isOpen={isFloatingLayerOpen}
+        onClose={() => setIsFloatingLayerOpen(false)}
+        title="My Floating Layer"
+        // ... other props
+      />
+    </PageLayout>
+  );
+}
+``` 
