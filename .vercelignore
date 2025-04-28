@@ -1,0 +1,8 @@
+# Ignore build artifacts and local config
+node_modules
+.next
+
+# Ignore leftover Storybook/Vitest config causing issues
+vitest.config.ts
+stories/
+.storybook/ 
