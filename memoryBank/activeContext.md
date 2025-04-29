@@ -2,41 +2,44 @@
 
 ## Current Work Focus
 
-Bootstrapping the `floating` Next.js component library project.
+Finalizing initial deployment and documentation after resolving build/deployment issues.
 
-## Recent Changes
+## Recent Changes Summary
 
--   Created initial Memory Bank files (`projectbrief.md`, `productContext.md`, `activeContext.md`, `systemPatterns.md`, `techContext.md`, `progress.md`).
--   Populated Memory Bank files based on the initial project description.
+*   ... (previous component refinements: layout, state, styling, width, padding)
+*   **Troubleshooting Vercel Deployment:**
+    *   Initial deployments failed, getting stuck or resulting in 404s/default pages.
+    *   Checked/Corrected Vercel Settings: Set Framework Preset to `Next.js`, set Root Directory to `app`.
+    *   Identified and fixed local build errors caused by leftover Storybook files (`src/stories/` removed).
+    *   Identified Vercel build error caused by leftover `vitest.config.ts`.
+    *   Added `.vercelignore` file to root directory to explicitly ignore `vitest.config.ts` and other potential leftovers.
+*   **Code State:** All intended component code and configuration fixes have been pushed to GitHub (`main` branch).
 
 ## Next Steps
 
-1.  Initialize the Next.js project within the `floating` directory using `create-next-app`.
-2.  Install and configure `shadcn/ui`.
-3.  Create the basic folder structure (`components/`, `views/`, `docs/`).
-4.  Implement the `PageLayout` component.
-5.  Implement the `FloatingLayer` component.
-6.  Implement the `ExamplePage` view.
-7.  Set up Storybook.
-8.  Create Storybook stories (`FloatingLayer.stories.tsx`).
-9.  Create MDX documentation files.
-10. Update `package.json` scripts.
+1.  **Verify Vercel Deployment:** Confirm that the latest push (with `.vercelignore`) deploys successfully on Vercel and shows the correct application.
+2.  **Update Documentation:** Review `docs/README.md`, `docs/components/PageLayout.mdx`, and `docs/components/FloatingLayer.mdx` to ensure they fully match the final state of the components and Vercel deployment setup.
+3.  Address any remaining minor TODOs or refinements for the wireframe demo.
 
 ## Active Decisions & Considerations
 
--   Project Name: `floating`
--   Technology Stack: Next.js (App Router, TypeScript, Tailwind), shadcn/ui.
--   Initial Components: `PageLayout`, `FloatingLayer`.
--   Styling Approach: Minimalistic, wireframe-like, using shadcn/ui defaults.
--   Directory Structure: Standard Next.js (`src/`), plus `components/`, `views/`, `docs/`.
+*   Repository structure uses `floating/` as the Git root, with the Next.js project located in `app/`.
+*   Vercel configured with Framework Preset=`Next.js`, Root Directory=`app`.
+*   `.vercelignore` is used to prevent specific files/folders from interfering with the Vercel build.
+*   Skipping Storybook setup.
+*   Dragging and resizing features are postponed.
+*   `FloatingLayer` uses fixed positioning and slide-in options panel.
+*   `FloatingLayer` width is 450px.
 
 ## Important Patterns & Preferences
 
--   Use TypeScript.
--   Use `shadcn/ui` components where possible.
--   Maintain clear documentation in the Memory Bank and `docs/` folder.
--   Follow the logical steps outlined in the project brief.
+*   ... (previous patterns)
+*   Ensure Vercel build settings (Framework Preset, Root Directory) match the project structure.
+*   Use `.vercelignore` to explicitly exclude files that might cause deployment issues.
 
 ## Learnings & Project Insights
 
--   (None yet - project just started) 
+*   ... (previous learnings)
+*   Vercel deployment issues with nested projects often stem from incorrect Root Directory or Framework Preset settings.
+*   Leftover files from previous installations (like Storybook examples or config files) can cause build failures even if not actively used.
+*   `.vercelignore` provides an explicit way to control files included in the Vercel deployment. 

@@ -1,18 +1,18 @@
 # FloatingLayer Component
 
-A right-aligned, fixed-position overlay component with a header and toggleable options panel.
+A right-aligned, fixed-position overlay component (450px wide) with a header and toggleable options panel.
 
 ## Description
 
-The `FloatingLayer` uses `shadcn/ui`'s `Card` component as its base. It positions itself fixed to the top-right of the viewport (`top-16`, `right-4`, `bottom-6`). It features:
+The `FloatingLayer` uses `shadcn/ui`'s `Card` component as its base. It positions itself fixed to the top-right of the viewport (`top-16`, `right-4`, `bottom-6`) and has a fixed width (`w-[450px]`). It features:
 
-*   **Header:** Contains:
+*   **Header:** Contains (with `px-4` horizontal padding):
     *   An orange Menu button (≡) on the left.
     *   An optional title next to the Menu button.
     *   A red Close button (×) on the right.
 *   **External Control:** The layer's visibility is controlled by the parent via the `isOpen` prop. The Close button calls the `onClose` prop passed by the parent.
-*   **Options Panel:** Clicking the Menu button triggers a slide-in animation where the `optionsContent` slides in from the left, replacing the main `children` content.
-*   **Content Area:** When the options panel is closed, the main `children` are displayed. This area scrolls if content exceeds the available height.
+*   **Options Panel:** Clicking the Menu button triggers a slide-in animation where the `optionsContent` slides in from the left, replacing the main `children` content. This panel has 16px (`px-4`) horizontal padding but no vertical padding from its container.
+*   **Content Area:** When the options panel is closed, the main `children` are displayed. This area has 16px (`p-4`) padding on all sides and scrolls if content exceeds the available height.
 
 ## Props
 
@@ -27,28 +27,28 @@ The `FloatingLayer` uses `shadcn/ui`'s `Card` component as its base. It position
 ## Wireframe / Visual (Options Closed)
 
 ```text
-+--------------------------------------+
-| [≡] Title                 [×]        |
-+======================================+
-|                                      |
-|      Main Content Area (children)    |
-|           (Scrollable)               |
-|                                      |
-+--------------------------------------+
++--------------------------------------------------+
+| [≡] Title                           [×]        |
++==================================================+
+|                                                  |
+|         Main Content Area (children)             |
+|              (p-4, Scrollable)                 |
+|                                                  |
++--------------------------------------------------+
 ```
-*(Positioned fixed, `top-16`, `right-4`, `bottom-6`)*
+*(Width: 450px. Position: fixed, `top-16`, `right-4`, `bottom-6`)*
 
 ## Wireframe / Visual (Options Open)
 
 ```text
-+--------------------------------------+
-| [≡] Title                 [×]        |
-+======================================+
-|                                      |
-|      Options Content Area            |
-|           (Scrollable)               |
-|                                      |
-+--------------------------------------+
++--------------------------------------------------+
+| [≡] Title                           [×]        |
++==================================================+
+|                                                  |
+|           Options Content Area (px-4)            |
+|                (Scrollable)                      |
+|                                                  |
++--------------------------------------------------+
 ```
 
 ## Functionality Notes

@@ -16,9 +16,9 @@ export default function PageLayout({
 }: PageLayoutProps) {
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="sticky top-0 z-50 w-full border-b bg-blue-200/50">
+      <header className="sticky top-0 z-50 w-full border-b bg-blue-100">
         <div className="flex h-14 items-center justify-between px-6">
-          <span className="font-bold">My Site</span>
+          <span className="font-bold">Floating UI</span>
           <div className="flex items-center space-x-2">
             {onToggleFloatingLayerClick && (
               <Button

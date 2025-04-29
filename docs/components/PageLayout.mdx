@@ -8,31 +8,47 @@ The `PageLayout` component renders a `<div>` container that uses flexbox to ensu
 
 *   **Header:** A sticky `<header>` element with a light blue, semi-transparent background (`bg-blue-200/50`) and a bottom border. Its content spans the full width and has 24px horizontal padding (`px-6`). It contains:
     *   "My Site" text aligned to the left padding edge.
-    *   An optional "Open Layer" (+) button aligned to the right padding edge.
-*   **Main Content Area:** A `<main>` element for the primary page content. It uses the `container` class for responsive centering and width, plus explicit `px-6` padding for a guaranteed 24px horizontal margin.
+    *   An optional "Toggle Layer" (+) button aligned to the right padding edge. This button displays an active state (e.g., darker background) when the layer is open (controlled by the `isLayerOpen` prop).
+*   **Main Content Area:** A `<main>` element for the primary page content. It uses the `container` class for responsive centering/max-width, plus explicit `px-4` padding for a guaranteed 16px horizontal margin.
 
 ## Props
 
-| Prop                       | Type           | Required | Default | Description                                                          |
-| :------------------------- | :------------- | :------- | :------ | :------------------------------------------------------------------- |
-| `children`                 | `React.ReactNode` | Yes      | -       | The content to be rendered inside the main area.                       |
-| `onOpenFloatingLayerClick` | `() => void`   | No       | -       | Callback function executed when the "Open Layer" (+) button is clicked. If not provided, the button is hidden. |
+| Prop                         | Type           | Required | Default | Description                                                                                          |
+| :--------------------------- | :------------- | :------- | :------ | :--------------------------------------------------------------------------------------------------- |
+| `children`                   | `React.ReactNode` | Yes      | -       | The content to be rendered inside the main area.                                                       |
+| `onToggleFloatingLayerClick` | `() => void`   | No       | -       | Callback function executed when the "Toggle Layer" (+) button is clicked. If not provided, the button is hidden. |
+| `isLayerOpen`                | `boolean`      | No       | `false` | Indicates if the associated floating layer is open. Used to style the toggle button's active state.      |
 
 ## Usage Example
 
 ```tsx
-import PageLayout from '@/components/PageLayout/PageLayout';
+// In a parent component managing state
+'use client';
 
-export default function MyPage() {
-  const handleOpenLayer = () => {
-    console.log('Open layer button clicked!');
-    // Typically, you would set state here to open the FloatingLayer
+import { useState } from 'react';
+import PageLayout from '@/components/PageLayout/PageLayout';
+import FloatingLayer from '@/components/FloatingLayer/FloatingLayer';
+
+export default function ExamplePage() {
+  const [isLayerOpen, setIsLayerOpen] = useState(true); // Example: start open
+
+  const handleToggleLayer = () => {
+    setIsLayerOpen(prev => !prev);
   };
 
   return (
-    <PageLayout onOpenFloatingLayerClick={handleOpenLayer}>
+    <PageLayout
+      onToggleFloatingLayerClick={handleToggleLayer}
+      isLayerOpen={isLayerOpen} // Pass state to control button appearance
+    >
       <h1>Page Title</h1>
       <p>This content will appear below the fixed header.</p>
+
+      <FloatingLayer
+        isOpen={isLayerOpen}
+        onClose={() => setIsLayerOpen(false)}
+        // ... other props
+      />
     </PageLayout>
   );
 }

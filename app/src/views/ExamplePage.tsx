@@ -5,15 +5,23 @@ import PageLayout from '@/components/PageLayout/PageLayout';
 import FloatingLayer from '@/components/FloatingLayer/FloatingLayer';
 import { Button } from '@/components/ui/button'; // Import Button
 import { Search, History, Settings } from 'lucide-react'; // Import Icons
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table" // Add Table imports
+// Import the new DataTable components
+import { DataTable } from '@/components/DataTable/DataTable';
+import { columns, type TopicData } from '@/components/DataTable/columns';
+
+// Define the data matching the TopicData type
+const data: TopicData[] = [
+  {
+    id: "1",
+    topic: "AI - Page interaction binding",
+    description: "There is no expectation that iterations within the AI container will be reflected on the parent page. The parent page is unaware of the AI container's existence.",
+  },
+  {
+    id: "2",
+    topic: "Design system",
+    description: "Owns design of the AI container wrapper, elevation, and the parent page.",
+  },
+];
 
 export default function ExamplePage() {
   const [isFloatingLayerOpen, setIsFloatingLayerOpen] = useState(true); // Changed initial state to true
@@ -29,35 +37,15 @@ export default function ExamplePage() {
     >
       {/* Pass function to open layer */}
       <h1>Parent Page Content</h1>
-      {/* Insert the table here */}
-      <div className="w-1/2 py-4"> {/* Container div with width and padding */}
-        <Table>
-          <TableCaption>A list of topics.</TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="font-bold">Topic</TableHead>
-              <TableHead>Description</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {/* Add table rows here as needed */}
-            <TableRow>
-              <TableCell className="font-bold align-top">AI - Page interaction binding</TableCell>
-              <TableCell className="align-top whitespace-normal">There is no expectation that interations within the AI container will be reflected on the parent page. The parent page is unaware of the AI container&apos;s existence.</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell className="font-bold align-top">Design system</TableCell>
-              <TableCell className="align-top whitespace-normal">Owns design of the AI container wrapper, elevation, and the parent page.</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
+      {/* Replace the old table with the DataTable component */}
+      <div className="py-4"> {/* Keep the container div for padding */}
+        <DataTable columns={columns} data={data} />
       </div>
-      {/* End of inserted table */}
 
       <FloatingLayer
         isOpen={isFloatingLayerOpen} // Pass state
         onClose={() => setIsFloatingLayerOpen(false)} // Pass function to close layer
-        title="My Floating Layer"
+        title="Floating Layer"
         optionsContent={
           // Updated options content structure
           <div className="flex flex-col h-full">
@@ -77,7 +65,7 @@ export default function ExamplePage() {
             <div className="flex-grow"></div>
 
             {/* Bottom Section: Single Button */}
-            <div className="border-t pt-2">
+            <div className="pt-2">
               <Button variant="ghost" size="sm" className="w-full justify-start">
                 <Settings className="h-4 w-4 mr-2" />
                 Settings
